@@ -1,15 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <Header :budaPrice="budaPrice" />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import BudaClient from "./api/buda-client";
+import Header from "./components/header.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    Header
+  },
+  data() {
+    return {
+      budaPrice: 23962841
+    };
+  },
+  mounted() {
+    setInterval(this.updateBudaPrice, 15 * 60 * 1000);
+    this.updateBudaPrice();
+  },
+  methods: {
+    updateBudaPrice() {
+      BudaClient.getBTCPrice().then(
+        response =>
+          (this.budaPrice = Math.trunc(
+            JSON.parse(response.data.contents).ticker.last_price[0]
+          ))
+      );
+    }
   }
 };
 </script>
