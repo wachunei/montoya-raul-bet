@@ -1,19 +1,37 @@
 <template>
-  <Header :budaPrice="budaPrice" />
+  <div class="flex justify-evenly">
+    <img class="transform scale-75" src="./assets/handshake.webp" />
+    <div class="self-center">
+      <h1 class="text-4xl mb-5">Apuesta Montoya-Raúl</h1>
+      <h2 class="text-2xl mb-1">The Sat-Peso Parity</h2>
+      <h3 class="text-l">17 de Diciembre 2021</h3>
+    </div>
+    <img class="transform scale-75" src="./assets/handshake.webp" />
+  </div>
+
+  <div class="flex mb-4 px-2 justify-evenly">
+    <Ticker :price="budaPrice" text="Current Price:" />
+    <Ticker :price="betPrice" text="Bet Price:" />
+  </div>
+
+  <Progress :currentValue="budaPrice" :total="betPrice" />
 </template>
 
 <script>
 import BudaClient from "./api/buda-client";
-import Header from "./components/header.vue";
+import Ticker from "./components/ticker.vue";
+import Progress from "./components/progress.vue";
 
 export default {
   name: "App",
   components: {
-    Header
+    Ticker,
+    Progress
   },
   data() {
     return {
-      budaPrice: 23962841
+      budaPrice: 23962841,
+      betPrice: 100_000_000
     };
   },
   mounted() {
@@ -40,6 +58,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
