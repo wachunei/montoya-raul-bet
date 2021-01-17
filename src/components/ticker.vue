@@ -1,7 +1,7 @@
 <template>
-  <div class="box-content w-80 shadow-lg border-2 rounded-sm">
+  <div class="box-content w-80 shadow-lg border-2 p-2 rounded-sm">
     <p class="font-bold">{{ text }}</p>
-    {{ price.toLocaleString() }} CLP
+    {{ price.toLocaleString() }} {{ symbol }}
   </div>
 </template>
 
@@ -15,6 +15,10 @@ export default {
     text: {
       type: String,
       default: ""
+    },
+    symbol: {
+      type: String,
+      default: "CLP"
     }
   }
 };
