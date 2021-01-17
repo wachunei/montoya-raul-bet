@@ -1,0 +1,54 @@
+<template>
+  <div class="border-2 rounded m-4 p-1 self-center">
+    <p class="w-64">
+      Para dar vuelta el resultado
+      <span class="font-bold text-xl">{{ currentLoser }}</span> necesita que el
+      BTC se
+      <span class="font-bold text-xl">{{ requiredAction }}</span>
+      aproximadamente {{ rate.toLocaleString() }} CLP por día.
+    </p>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    currentValue: {
+      type: Number,
+      required: true
+    },
+    targetValue: {
+      type: Number,
+      required: true
+    },
+    betEndDate: {
+      type: Date,
+      required: true
+    }
+  },
+  computed: {
+    currentLoser() {
+      return this.currentValue >= this.targetValue ? "Raúl" : "Javier";
+    },
+    requiredAction() {
+      return this.currentValue >= this.targetValue ? "desvalorice" : "valorice";
+    },
+    rate() {
+      const currentDate = Date.now();
+      const daysDiff = this.daysDiff(currentDate, this.betEndDate);
+      const valueDiff = Math.abs(this.targetValue - this.currentValue);
+
+      return Math.round(valueDiff / daysDiff);
+    }
+  },
+  methods: {
+    daysDiff(date1, date2) {
+      const secondsDiff = Math.floor((date2 - date1) / 1000);
+      const minutesDiff = Math.floor(secondsDiff / 60);
+      const hoursDiff = Math.ceil(minutesDiff / 60);
+
+      return Math.ceil(hoursDiff / 24);
+    }
+  }
+};
+</script>
