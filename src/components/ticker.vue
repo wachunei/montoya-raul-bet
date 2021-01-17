@@ -1,6 +1,7 @@
 <template>
-  <div class="box-content h-8 w-80 shadow-lg border-solid border-2 rounded-sm">
-    {{ text }} {{ price.toLocaleString() }} CLP
+  <div class="box-content w-80 shadow-lg border-2 rounded-sm">
+    <p class="font-bold">{{ text }}</p>
+    {{ price.toLocaleString() }} CLP
   </div>
 </template>
 

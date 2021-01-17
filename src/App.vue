@@ -15,18 +15,23 @@
   </div>
 
   <Progress :currentValue="budaPrice" :total="betPrice" />
+  <div class="flex justify-center">
+    <CurrentWinner :threshold="budaPrice >= betPrice" />
+  </div>
 </template>
 
 <script>
 import BudaClient from "./api/buda-client";
 import Ticker from "./components/ticker.vue";
 import Progress from "./components/progress.vue";
+import CurrentWinner from "./components/current-winner.vue";
 
 export default {
   name: "App",
   components: {
-    Ticker,
-    Progress
+    CurrentWinner,
+    Progress,
+    Ticker
   },
   data() {
     return {
