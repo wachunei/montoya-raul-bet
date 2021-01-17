@@ -12,6 +12,7 @@
   <div class="flex mb-4 px-2 justify-evenly">
     <Ticker :price="budaPrice" text="Current Price:" />
     <Ticker :price="betPrice" text="Bet Price:" />
+    <Ticker :price="budaPrice / 10000" text="Current Bet Value:" />
   </div>
 
   <Progress :currentValue="budaPrice" :total="betPrice" />
