@@ -15,7 +15,7 @@
     <Ticker :price="budaPrice" text="Current Price:" />
     <Ticker :price="betPrice" text="Bet Price:" />
     <Ticker :price="10000" text="Bet amount:" symbol="Sats" />
-    <Ticker :price="budaPrice / 10000" text="Current Bet Value:" />
+    <Ticker :price="Math.round(budaPrice / 10000)" text="Current Bet Value:" />
   </div>
 
   <Progress :currentValue="budaPrice" :total="betPrice" />
