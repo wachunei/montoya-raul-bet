@@ -19,7 +19,7 @@
   </div>
 
   <Progress :currentValue="budaPrice" :total="betPrice" />
-  <div class="flex justify-center">
+  <div class="flex justify-center mb-4">
     <CurrentWinner :threshold="budaPrice >= betPrice" />
     <Flippening
       :currentValue="budaPrice"
