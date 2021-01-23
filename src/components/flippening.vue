@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import daysDiff from "../utils/days-difference";
+
 export default {
   props: {
     currentValue: {
@@ -35,19 +37,10 @@ export default {
     },
     rate() {
       const currentDate = Date.now();
-      const daysDiff = this.daysDiff(currentDate, this.betEndDate);
+      const daysDifference = daysDiff(currentDate, this.betEndDate);
       const valueDiff = Math.abs(this.targetValue - this.currentValue);
 
-      return Math.round(valueDiff / daysDiff);
-    }
-  },
-  methods: {
-    daysDiff(date1, date2) {
-      const secondsDiff = Math.floor((date2 - date1) / 1000);
-      const minutesDiff = Math.floor(secondsDiff / 60);
-      const hoursDiff = Math.ceil(minutesDiff / 60);
-
-      return Math.ceil(hoursDiff / 24);
+      return Math.round(valueDiff / daysDifference);
     }
   }
 };

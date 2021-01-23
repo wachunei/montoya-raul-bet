@@ -7,6 +7,7 @@
       </h1>
       <h2 class="text-2xl mb-1">The Sat-Peso Parity</h2>
       <h3 class="text-l">
+        {{ betStartDate.toLocaleString("es-ES", dateFormatOptions) }} -
         {{ betEndDate.toLocaleString("es-ES", dateFormatOptions) }}
       </h3>
     </div>
@@ -20,7 +21,16 @@
     <Ticker :price="Math.round(budaPrice / 10000)" text="Current Bet Value:" />
   </div>
 
-  <Progress :currentValue="budaPrice" :total="betPrice" />
+  <Progress
+    :currentValue="daysElapsed"
+    :total="totalDays"
+    :title="'Date progress:'"
+  />
+  <Progress
+    :currentValue="budaPrice"
+    :total="betPrice"
+    :title="'Price Progress:'"
+  />
   <div class="flex justify-center mb-4">
     <CurrentWinner :threshold="budaPrice >= betPrice" />
     <Flippening
@@ -37,6 +47,7 @@ import CurrentWinner from "./components/current-winner.vue";
 import Flippening from "./components/flippening.vue";
 import Progress from "./components/progress.vue";
 import Ticker from "./components/ticker.vue";
+import daysDiff from "./utils/days-difference";
 
 export default {
   name: "App",
@@ -50,6 +61,7 @@ export default {
     return {
       budaPrice: 26_450_000,
       betPrice: 100_000_000,
+      betStartDate: new Date(Date.parse("17 Dec 2020 23:59:59")),
       betEndDate: new Date(Date.parse("17 Dec 2021 23:59:59")),
       dateFormatOptions: {
         weekday: "long",
@@ -58,6 +70,14 @@ export default {
         year: "numeric"
       }
     };
+  },
+  computed: {
+    totalDays() {
+      return daysDiff(this.betStartDate, this.betEndDate);
+    },
+    daysElapsed() {
+      return daysDiff(this.betStartDate, new Date());
+    }
   },
   mounted() {
     setInterval(this.updateBudaPrice, 15 * 60 * 1000);
