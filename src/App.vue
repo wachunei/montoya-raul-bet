@@ -25,11 +25,13 @@
     :currentValue="daysElapsed"
     :total="totalDays"
     :title="'Date progress:'"
+    :type="'date'"
   />
   <Progress
     :currentValue="budaPrice"
     :total="betPrice"
     :title="'Price Progress:'"
+    :type="'currency'"
   />
   <div class="flex justify-center mb-4">
     <CurrentWinner :threshold="budaPrice >= betPrice" />

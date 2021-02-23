@@ -5,13 +5,14 @@
       <span class="font-bold text-xl">{{ currentLoser }}</span> necesita que el
       BTC se
       <span class="font-bold text-xl">{{ requiredAction }}</span>
-      aproximadamente {{ rate.toLocaleString() }} CLP por día.
+      aproximadamente {{ formatCLP(rate) }} CLP por día.
     </p>
   </div>
 </template>
 
 <script>
 import daysDiff from "../utils/days-difference";
+import formatCLP from "../utils/formatCLP";
 
 export default {
   props: {
@@ -42,6 +43,9 @@ export default {
 
       return Math.round(valueDiff / daysDifference);
     }
+  },
+  methods: {
+    formatCLP
   }
 };
 </script>
